@@ -1,13 +1,13 @@
 import {Image, ImageBackground, Text, View} from "react-native";
 import {images} from "@/constants/images";
 
-interface TabIconProps {
+interface Props {
     focused: boolean,
     icon: any,
     title: string
 }
 
-const TabIconComponent = ({focused, icon, title}: TabIconProps) => {
+const TabBarIcon = ({focused, icon, title}: Props) => {
     return (
         focused ? (
             <ImageBackground source={images.highlight}
@@ -23,4 +23,4 @@ const TabIconComponent = ({focused, icon, title}: TabIconProps) => {
     )
 }
 
-export default TabIconComponent;
+export default TabBarIcon;
