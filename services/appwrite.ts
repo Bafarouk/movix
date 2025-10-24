@@ -1,5 +1,3 @@
-// track the search made by user
-
 import {Client, ID, Query, TablesDB} from "react-native-appwrite";
 
 const DATABASE_ID = process.env.EXPO_PUBLIC_APPWRITE_DATABASE_ID!;
@@ -42,5 +40,25 @@ export const updateSearchCount = async (query: string, movie: Movie) => {
     } catch (error) {
         console.error("Error updating search count:", error);
         throw error;
+    }
+}
+
+export const getTrendingMovies = async (): Promise<TrendingMovie[] | undefined> => {
+    try {
+        const result = await dataBase.listRows({
+            databaseId: DATABASE_ID,
+            tableId: TABLE_ID,
+            queries:
+                [
+                    Query.limit(5),
+                    Query.orderDesc('count')
+                ]
+        });
+
+        return result.rows as unknown as TrendingMovie[];
+
+    } catch (error) {
+        console.error("Error fetching trending movies:", error);
+        return undefined;
     }
 }
